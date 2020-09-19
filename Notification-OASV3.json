@@ -1,0 +1,777 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://cx-notification-services.dev.services",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/services/email/{eid}": {
+      "get": {
+        "tags": [
+          "email-controller"
+        ],
+        "operationId": "retrieve",
+        "parameters": [
+          {
+            "name": "eid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "email-controller"
+        ],
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "eid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "email-controller"
+        ],
+        "operationId": "send",
+        "parameters": [
+          {
+            "name": "eid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "default response"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "email-controller"
+        ],
+        "operationId": "cancel",
+        "parameters": [
+          {
+            "name": "eid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/services/email/{eid}/attachment": {
+      "post": {
+        "tags": [
+          "email-controller"
+        ],
+        "operationId": "addAttachment",
+        "parameters": [
+          {
+            "name": "eid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contentId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentType",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "INLINE",
+                "ATTACHMENT"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "email-controller"
+        ],
+        "operationId": "deleteAttachments",
+        "parameters": [
+          {
+            "name": "eid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/services/email/{eid}/attachment/{aid}": {
+      "delete": {
+        "tags": [
+          "email-controller"
+        ],
+        "operationId": "deleteAttachment",
+        "parameters": [
+          {
+            "name": "eid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "aid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/services/email": {
+      "post": {
+        "tags": [
+          "email-controller"
+        ],
+        "operationId": "create",
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/services/config": {
+      "get": {
+        "tags": [
+          "configuration-controller"
+        ],
+        "operationId": "getAllConfigurations",
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppMessageConfigurationDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "configuration-controller"
+        ],
+        "operationId": "updateApplicationConfiguration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppMessageConfigurationDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppMessageConfigurationDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/services/sms/{sid}": {
+      "get": {
+        "tags": [
+          "sms-controller"
+        ],
+        "operationId": "retrieve_1",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "sms-controller"
+        ],
+        "operationId": "update_1",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmsRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "sms-controller"
+        ],
+        "operationId": "send_1",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "default response"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "sms-controller"
+        ],
+        "operationId": "cancel_1",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/services/sms": {
+      "post": {
+        "tags": [
+          "sms-controller"
+        ],
+        "operationId": "create_1",
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EmailAttachmentDTO": {
+        "type": "object",
+        "properties": {
+          "aid": {
+            "type": "string"
+          },
+          "filename": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "disposition": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        }
+      },
+      "EmailResponseDTO": {
+        "type": "object",
+        "properties": {
+          "eid": {
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/components/schemas/SenderResponseDTO"
+          },
+          "to": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecipientResponseDTO"
+            }
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecipientResponseDTO"
+            }
+          },
+          "bcc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecipientResponseDTO"
+            }
+          },
+          "subject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "READY",
+              "SCHEDULED",
+              "SENT",
+              "CANCELED",
+              "ERROR"
+            ]
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailAttachmentDTO"
+            }
+          }
+        }
+      },
+      "RecipientResponseDTO": {
+        "required": [
+          "emailAddress"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "type": "string"
+          }
+        }
+      },
+      "SenderResponseDTO": {
+        "required": [
+          "applicationName",
+          "salesOrg",
+          "subCode"
+        ],
+        "type": "object",
+        "properties": {
+          "applicationName": {
+            "type": "string"
+          },
+          "subCode": {
+            "type": "string"
+          },
+          "salesOrg": {
+            "type": "string"
+          }
+        }
+      },
+      "EmailRequestDTO": {
+        "required": [
+          "bcc",
+          "cc",
+          "eid",
+          "from",
+          "to"
+        ],
+        "type": "object",
+        "properties": {
+          "eid": {
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/components/schemas/SenderRequestDTO"
+          },
+          "to": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecipientRequestDTO"
+            }
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecipientRequestDTO"
+            }
+          },
+          "bcc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecipientRequestDTO"
+            }
+          },
+          "subject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          }
+        }
+      },
+      "RecipientRequestDTO": {
+        "required": [
+          "emailAddress"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "type": "string"
+          }
+        }
+      },
+      "SenderRequestDTO": {
+        "required": [
+          "applicationName",
+          "salesOrg",
+          "subCode"
+        ],
+        "type": "object",
+        "properties": {
+          "applicationName": {
+            "type": "string"
+          },
+          "subCode": {
+            "type": "string"
+          },
+          "salesOrg": {
+            "type": "string"
+          }
+        }
+      },
+      "AppMessageConfigurationDTO": {
+        "required": [
+          "application",
+          "subcodes"
+        ],
+        "type": "object",
+        "properties": {
+          "application": {
+            "type": "string"
+          },
+          "subcodes": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SubcodeDTO"
+            }
+          }
+        }
+      },
+      "EmailConfigDTO": {
+        "required": [
+          "usage"
+        ],
+        "type": "object",
+        "properties": {
+          "usage": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "type": "string"
+          },
+          "mailtrapUsername": {
+            "type": "string"
+          },
+          "mailtrapPassword": {
+            "type": "string"
+          },
+          "sendgridKey": {
+            "type": "string"
+          }
+        }
+      },
+      "SalesOrgDTO": {
+        "type": "object",
+        "properties": {
+          "smsConfig": {
+            "$ref": "#/components/schemas/SmsConfigDTO"
+          },
+          "emailConfig": {
+            "$ref": "#/components/schemas/EmailConfigDTO"
+          }
+        }
+      },
+      "SmsConfigDTO": {
+        "required": [
+          "usage"
+        ],
+        "type": "object",
+        "properties": {
+          "usage": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "mailtrapUsername": {
+            "type": "string"
+          },
+          "mailtrapPassword": {
+            "type": "string"
+          },
+          "accountSid": {
+            "type": "string"
+          },
+          "authToken": {
+            "type": "string"
+          }
+        }
+      },
+      "SubcodeDTO": {
+        "required": [
+          "salesOrgs"
+        ],
+        "type": "object",
+        "properties": {
+          "salesOrgs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SalesOrgDTO"
+            }
+          }
+        }
+      },
+      "SmsResponseDTO": {
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/components/schemas/SenderResponseDTO"
+          },
+          "to": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "READY",
+              "SCHEDULED",
+              "SENT",
+              "CANCELED",
+              "ERROR"
+            ]
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SmsRequestDTO": {
+        "required": [
+          "from",
+          "sid"
+        ],
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/components/schemas/SenderRequestDTO"
+          },
+          "to": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

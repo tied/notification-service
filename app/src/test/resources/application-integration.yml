@@ -1,0 +1,36 @@
+######### application server
+server:
+  port: 8080
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+  data:
+    mongodb:
+      uri: mongodb://localhost:${MONGO_PORT}/test
+
+notification:
+  sms:
+    applications:
+      'CSPLUS':
+        subCodes:
+          'BILLING':
+            salesOrgs:
+              'D0001':
+                usage: mailtrap
+                mailtrapUsername: b8618dd5f407b7
+                mailtrapPassword: 81ae6ad8f755ca
+                phoneNumber: +351961234567
+  email:
+    applications:
+      'CSPLUS':
+        subCodes:
+          'BILLING':
+            salesOrgs:
+              'D0001':
+                usage: mailtrap
+                mailtrapUsername: b8618dd5f407b7
+                mailtrapPassword: 81ae6ad8f755ca
+                emailAddress: test@mailtrap.com

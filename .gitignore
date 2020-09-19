@@ -1,0 +1,7 @@
+.project
+.settings
+.classpath
+api/target
+app/target
+client/target
+application-dev.yml

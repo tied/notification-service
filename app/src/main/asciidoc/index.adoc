@@ -1,0 +1,28 @@
+:sectnums:
+:sectnumlevels: 5
+:toc: left
+:toclevels: 2
+:page-layout: docs
+
+= Notification Services
+
+This is the REST documentation for the Notification Services
+
+== Email Services
+
+include::{snippets}/email/create/auto-section.adoc[]
+include::{snippets}/email/update/auto-section.adoc[]
+include::{snippets}/email/addAttachment/auto-section.adoc[]
+include::{snippets}/email/deleteAttachment/auto-section.adoc[]
+include::{snippets}/email/deleteAttachments/auto-section.adoc[]
+include::{snippets}/email/cancel/auto-section.adoc[]
+include::{snippets}/email/send/auto-section.adoc[]
+include::{snippets}/email/retrieve/auto-section.adoc[]
+
+== SMS Services
+
+include::{snippets}/sms/create/auto-section.adoc[]
+include::{snippets}/sms/update/auto-section.adoc[]
+include::{snippets}/sms/cancel/auto-section.adoc[]
+include::{snippets}/sms/send/auto-section.adoc[]
+include::{snippets}/sms/retrieve/auto-section.adoc[]

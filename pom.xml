@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.4.RELEASE</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>com.carlsberg.cx.notification-services</groupId>
+  <artifactId>notification-services-parent</artifactId>
+  <version>1.2.1</version>
+  <name>CX Notification services</name>
+  <description>CX Notification services</description>
+  <packaging>pom</packaging>
+
+  <properties>
+    <java.version>11</java.version>
+    <org.zalando.version>0.22.0</org.zalando.version>
+    <org.projectlombok.version>1.18.2</org.projectlombok.version>
+    <org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
+    <logbook.version>2.0.0</logbook.version>
+    <spring-auto-restdocs.version>2.0.5</spring-auto-restdocs.version>
+    <spring-restdocs-mockmvc.version>2.0.3.RELEASE</spring-restdocs-mockmvc.version>
+    <json-doclet.artifactId>spring-auto-restdocs-json-doclet-jdk9</json-doclet.artifactId>
+    <testcontainers.version>1.13.0</testcontainers.version>
+    <twilio.sdk.version>7.42.0</twilio.sdk.version>
+    <sendgrid.sdk.version>4.0.1</sendgrid.sdk.version>
+    <springdoc.openapi.version>1.2.32</springdoc.openapi.version>
+    <asciidoc.confluence.version>0.8.0-CB-1</asciidoc.confluence.version>
+    <failsafe.version>2.4.0</failsafe.version>
+  </properties>
+
+  <modules>
+    <module>api</module>
+    <module>app</module>
+    <module>client</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.zalando</groupId>
+        <artifactId>problem-spring-web</artifactId>
+        <version>${org.zalando.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${org.projectlombok.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${org.mapstruct.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.zalando</groupId>
+        <artifactId>logbook-spring-boot-starter</artifactId>
+        <version>${logbook.version}</version>
+      </dependency>
+
+      <!-- AUTO REST DOCS -->
+      <!-- https://mvnrepository.com/artifact/org.springframework.restdocs/spring-restdocs-mockmvc -->
+      <dependency>
+        <groupId>org.springframework.restdocs</groupId>
+        <artifactId>spring-restdocs-mockmvc</artifactId>
+        <version>${spring-restdocs-mockmvc.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>capital.scalable</groupId>
+        <artifactId>spring-auto-restdocs-core</artifactId>
+        <version>${spring-auto-restdocs.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>capital.scalable</groupId>
+        <artifactId>spring-auto-restdocs-annotations</artifactId>
+        <version>${spring-auto-restdocs.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-webmvc-core</artifactId>
+        <version>${springdoc.openapi.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers</artifactId>
+        <version>${testcontainers.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>${testcontainers.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.twilio.sdk</groupId>
+        <artifactId>twilio</artifactId>
+        <version>${twilio.sdk.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sendgrid</groupId>
+        <artifactId>sendgrid-java</artifactId>
+        <version>${sendgrid.sdk.version}</version>
+      </dependency>
+
+      <!-- Failsafe Retry -->
+      <dependency>
+        <groupId>net.jodah</groupId>
+        <artifactId>failsafe</artifactId>
+        <version>${failsafe.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <extensions>true</extensions>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>generate-javadoc-json</id>
+              <phase>process-sources</phase>
+              <goals>
+                <goal>javadoc-no-fork</goal>
+              </goals>
+              <configuration>
+                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+                <doclet>capital.scalable.restdocs.jsondoclet.ExtractDocumentationAsJsonDoclet</doclet>
+                <docletArtifact>
+                  <groupId>capital.scalable</groupId>
+                  <artifactId>${json-doclet.artifactId}</artifactId>
+                  <version>${spring-auto-restdocs.version}</version>
+                </docletArtifact>
+                <reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
+                <useStandardDocletOptions>false</useStandardDocletOptions>
+                <show>package</show>
+                <doclint>none</doclint>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>copy-resources</id>
+              <phase>prepare-package</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                <resources>
+                  <resource>
+                    <directory>${project.build.directory}/generated-javadoc-json</directory>
+                    <filtering>false</filtering>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.sahli.asciidoc.confluence.publisher</groupId>
+          <artifactId>asciidoc-confluence-publisher-maven-plugin</artifactId>
+          <version>${asciidoc.confluence.version}</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

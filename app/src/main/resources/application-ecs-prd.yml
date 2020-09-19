@@ -1,0 +1,33 @@
+#### PRD ECS
+
+notification:
+  sms:
+    applications:
+      'EIDENTITY':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              '1010':
+                usage: twilio
+                phoneNumber: ${EIDENTITY_TWILIO_PHONE}
+                twilioAccountSid: ${EIDENTITY_TWILIO_ACCOUNT_SID}
+                twilioAuthToken: ${EIDENTITY_TWILIO_AUTH_TOKEN}
+      'CSPLUS':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              '1010':
+                usage: twilio
+                phoneNumber: ${CSPLUS_TWILIO_PHONE}
+                twilioAccountSid: ${CSPLUS_TWILIO_ACCOUNT_SID}
+                twilioAuthToken: ${CSPLUS_TWILIO_AUTH_TOKEN}
+  email:
+    applications:
+      'CSPLUS':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              '1010':
+                usage: twilio
+                emailAddress: ${CSPLUS_SENDGRID_EMAIL}
+                sendgridKey: ${CSPLUS_SENDGRID_KEY}

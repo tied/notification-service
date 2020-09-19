@@ -1,0 +1,34 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/carlsberg
+
+notification:
+  sms:
+    applications:
+      'CSPLUS':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              'DEFAULT':
+                usage: mailtrap
+                mailtrapUsername: b8618dd5f407b7
+                mailtrapPassword: 81ae6ad8f755ca
+                phoneNumber: '+3511234566'
+          'BILLING':
+            salesOrgs:
+              'D0001':
+                usage: mailtrap
+                mailtrapUsername: b8618dd5f407b7
+                mailtrapPassword: 81ae6ad8f755ca
+                phoneNumber: '+3511234567'
+  email:
+    applications:
+      'CSPLUS':
+        subCodes:
+          'ORDERING':
+            salesOrgs:
+              'D0001':
+                usage: twilio
+                sendgridKey: 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
+                emailAddress: test@mailtrap.com

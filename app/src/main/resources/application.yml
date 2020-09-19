@@ -1,0 +1,37 @@
+######### logging
+logging:
+  level:
+    root: ${APPLICATION_SERVER_LOG_LEVEL:INFO}
+    org.zalando.logbook: TRACE
+
+######### application server
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/hal+json,application/problem+json,multipart/form-data
+
+notification:
+  delay:
+    initial: ${INITIAL_DELAY:1}
+    max: ${MAX_DELAY:20}
+  retries:
+    max: ${MAX_RETRIES:5}
+  scheduler:
+    email:
+      fixed-delay: ${EMAIL_SCHEDULER_DELAY:1000}
+    sms:
+      fixed-delay: ${SMS_SCHEDULER_DELAY:1000}
+
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+  data:
+    mongodb:
+      uri: ${DOC_PROTOCOL}://${DOC_USER}:${DOC_PASS}@${DOC_URL}
+
+aws:
+  pem: ${AWS.PEM:classpath:keys/rds-combined-ca-bundle_20200430.pem}

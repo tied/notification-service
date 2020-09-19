@@ -1,0 +1,71 @@
+#### DEV ECS
+
+notification:
+  sms:
+    applications:
+      'EIDENTITY':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              'DEFAULT':
+                usage: mailtrap
+                phoneNumber: ${EIDENTITY_MAILTRAP_PHONE}
+                mailtrapUsername: ${EIDENTITY_MAILTRAP_USER}
+                mailtrapPassword: ${EIDENTITY_MAILTRAP_PASS}
+      'CSPLUS':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              'DEFAULT':
+                usage: mailtrap
+                phoneNumber: ${CSPLUS_MAILTRAP_PHONE}
+                mailtrapUsername: ${CSPLUS_MAILTRAP_USER}
+                mailtrapPassword: ${CSPLUS_MAILTRAP_PASS}
+      'SKILLABLE':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              'DEFAULT':
+                usage: mailtrap
+                phoneNumber: ${SKILLABLE_MAILTRAP_PHONE}
+                mailtrapUsername: ${SKILLABLE_MAILTRAP_USER}
+                mailtrapPassword: ${SKILLABLE_MAILTRAP_PASS}
+      'LEANSIGNUP':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              'DEFAULT':
+                usage: mailtrap
+                emailAddress: ${LEANSIGNUP_MAILTRAP_PHONE}
+                mailtrapUsername: ${LEANSIGNUP_MAILTRAP_USER}
+                mailtrapPassword: ${LEANSIGNUP_MAILTRAP_PASS}
+  email:
+    applications:
+      'CSPLUS':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              'DEFAULT':
+                usage: mailtrap
+                emailAddress: ${CSPLUS_MAILTRAP_EMAIL}
+                mailtrapUsername: ${CSPLUS_MAILTRAP_USER}
+                mailtrapPassword: ${CSPLUS_MAILTRAP_PASS}
+      'SKILLABLE':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              'DEFAULT':
+                usage: mailtrap
+                emailAddress: ${SKILLABLE_MAILTRAP_EMAIL}
+                mailtrapUsername: ${SKILLABLE_MAILTRAP_USER}
+                mailtrapPassword: ${SKILLABLE_MAILTRAP_PASS}
+      'LEANSIGNUP':
+        subCodes:
+          'DEFAULT':
+            salesOrgs:
+              'DEFAULT':
+                usage: mailtrap
+                emailAddress: ${LEANSIGNUP_MAILTRAP_EMAIL}
+                mailtrapUsername: ${LEANSIGNUP_MAILTRAP_USER}
+                mailtrapPassword: ${LEANSIGNUP_MAILTRAP_PASS}
+                
