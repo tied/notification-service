@@ -135,60 +135,6 @@
           </executions>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <extensions>true</extensions>
-          <executions>
-            <execution>
-              <id>attach-javadocs</id>
-              <goals>
-                <goal>jar</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>generate-javadoc-json</id>
-              <phase>process-sources</phase>
-              <goals>
-                <goal>javadoc-no-fork</goal>
-              </goals>
-              <configuration>
-                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
-                <doclet>capital.scalable.restdocs.jsondoclet.ExtractDocumentationAsJsonDoclet</doclet>
-                <docletArtifact>
-                  <groupId>capital.scalable</groupId>
-                  <artifactId>${json-doclet.artifactId}</artifactId>
-                  <version>${spring-auto-restdocs.version}</version>
-                </docletArtifact>
-                <reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
-                <useStandardDocletOptions>false</useStandardDocletOptions>
-                <show>package</show>
-                <doclint>none</doclint>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <executions>
-            <execution>
-              <id>copy-resources</id>
-              <phase>prepare-package</phase>
-              <goals>
-                <goal>copy-resources</goal>
-              </goals>
-              <configuration>
-                <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                <resources>
-                  <resource>
-                    <directory>${project.build.directory}/generated-javadoc-json</directory>
-                    <filtering>false</filtering>
-                  </resource>
-                </resources>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
           <groupId>org.sahli.asciidoc.confluence.publisher</groupId>
           <artifactId>asciidoc-confluence-publisher-maven-plugin</artifactId>
           <version>${asciidoc.confluence.version}</version>
